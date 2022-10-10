@@ -2,6 +2,13 @@
 
 # Installation
 
+## Step 0: Create a new conda environment with Python 3.7
+
+```bash
+conda create --name musicseg_deepemb python=3.7
+conda activate musicseg_deepemb
+```
+
 ## Step 1: install non-python dependencies
 Install non-python dependencies:
 * ffmpeg
@@ -18,6 +25,13 @@ apt-get update --fix-missing && apt-get install libsndfile1 ffmpeg libsox-fmt-al
 cd musicsections
 pip install -e .
 ```
+
+## Step 3: Update Numpy
+
+```bash
+pip install numpy==1.21.5
+```
+
 
 # Example
 
