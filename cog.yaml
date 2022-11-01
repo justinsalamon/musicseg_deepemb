@@ -1,0 +1,46 @@
+# Configuration for Cog ⚙️
+# Reference: https://github.com/replicate/cog/blob/main/docs/yaml.md
+
+image: "r8.im/justinsalamon/musicseg_deepemb"
+build:
+  # set to true if your model requires a GPU
+  gpu: true
+
+  # a list of ubuntu apt packages to install
+  system_packages:
+    - "libsndfile1"
+    - "ffmpeg"
+    - "libsox-fmt-all"
+    - "sox"
+
+  # python version in the form '3.8' or '3.8.12'
+  python_version: "3.7"  # need this specific python version, otherwise can't load h5 models
+
+  # a list of packages in the format <package-name>==<version>
+  python_packages:
+    - "Cython==0.29.24"
+    - "torch==1.1.0"
+    - "torchvision==0.2.1"
+    - "torchsummary==1.5.1"
+    - "numpy==1.19.2"  # tf==2.7.0 requires this version
+    - "scipy==1.4.1"
+    - "scikit-learn==0.22.1"
+    - "audioread==2.1.8"
+    - "numba==0.48.0"
+    - "pandas==1.0.3"
+    - "resampy==0.2.2"
+    - "SoundFile==0.10.3.post1"
+    - "sox==1.3.7"
+    - "h5py==3.1.0"  # tf==2.7.0 requires this version
+    - "librosa==0.7.0"
+    - "tensorflow==2.7.0"  # tf==2.6.0 has a a bug https://stackoverflow.com/a/69831814/135797
+    - "mir_eval==0.6"
+    - "matplotlib==3.4.3"
+
+  # commands run after the enviroment is setup
+  run:
+    # need to install madmom separately since it requires Cython at install-time
+    - "pip install madmom==0.16.1"
+
+# predict.py defines how predictions are run on your model
+predict: "cog_predict.py:Predictor"

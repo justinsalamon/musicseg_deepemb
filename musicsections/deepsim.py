@@ -176,7 +176,7 @@ class DeepSimModel:
         # Get base model.
         with self.session.as_default():
             with self.session.graph.as_default():
-                model = load_model(model_filepath, compile=False)
+                model = load_model(model_filepath, compile=False, custom_objects={"K": K})
                 self.base_model = model.get_layer('base_model')
 
         # Get arguments

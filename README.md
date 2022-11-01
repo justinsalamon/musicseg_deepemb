@@ -1,5 +1,7 @@
 # Deep Embeddings and Section Fusion Improve Music Segmentation
 
+<a href="https://replicate.ai/musicseg_deepemb"><img src="https://img.shields.io/static/v1?label=Replicate&message=Demo and Docker Image&color=blue"></a>
+
 # Installation
 
 ## Step 0: Create a new conda environment with Python 3.7

@@ -5,7 +5,7 @@ import numpy as np
 import os
 
 
-def plot_levels(inters, labels, figsize, rotation):
+def plot_levels(inters, labels, figsize, rotation, display_seconds=False):
     """Plots the given hierarchy."""
     N = len(inters)
     fig, axs = plt.subplots(N, figsize=figsize)
@@ -13,10 +13,11 @@ def plot_levels(inters, labels, figsize, rotation):
         display.segments(np.asarray(inters[level]), labels[level], ax=axs[level])
         axs[level].set_yticks([0.5])
         axs[level].set_yticklabels([N - level])
-        axs[level].set_xticks([])
+        if level < N - 1 or not display_seconds:
+            axs[level].set_xticks([])
     axs[0].xaxis.tick_top()
     fig.subplots_adjust(top=0.8)  # Otherwise savefig cuts the top
-    
+
     return fig, axs
 
 def load_segmentation(json_file):
@@ -24,13 +25,13 @@ def load_segmentation(json_file):
         seg = json.load(f)
     return seg
 
-def plot_segmentation(seg, figsize=(13, 3), rotation=45):
+def plot_segmentation(seg, figsize=(13, 3), rotation=45, display_seconds=False):
     inters = []
     labels = []
     for level in seg[::-1]:
         inters.append(level[0])
         labels.append(level[1])
-    fig, axs = plot_levels(inters, labels, figsize, rotation)
+    fig, axs = plot_levels(inters, labels, figsize, rotation, display_seconds)
     fig.text(0.08, 0.47, 'Segmentation Levels', va='center', rotation='vertical')
 
 def plot_segmentation_json(json_path):
